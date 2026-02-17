@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Explora tus Emociones — Secundaria</title>
+  <meta name="description" content="Página educativa sobre emociones para estudiantes de educación secundaria. Incluye contenidos claros, actividades interactivas y un mini‑quiz." />
+  <style>
+    :root{
+      --bg:#0f1220;
+      --card:#151936;
+      --muted:#9aa0ff;
+      --text:#eef0ff;
+      --accent:#7c8cff;
+      --soft:#23286a;
+      --ok:#35d399;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --radius:1.25rem;
+      --shadow:0 10px 25px rgba(0,0,0,.25);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, #1b1f55, transparent 60%), var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    header{
+      position:sticky; top:0; z-index:10; backdrop-filter: blur(8px);
+      background: linear-gradient(to bottom, rgba(15,18,32,.9), rgba(15,18,32,.6));
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+    .wrap{max-width:1100px; margin:0 auto; padding:1rem 1.25rem}
+    .hero{
+      display:grid; grid-template-columns:1.2fr .8fr; gap:1rem; align-items:center;
+      padding:1.25rem 0 1.75rem 0;
+    }
+    .hero h1{font-size:clamp(1.6rem, 2.8vw, 2.4rem); margin:.25rem 0}
+    .hero p{color:#cfd3ff; margin:.25rem 0 .75rem}
+    .pill{display:inline-block; padding:.35rem .6rem; border-radius:999px; background:var(--soft); color:#cfd3ff; font-size:.75rem}
+    .search{
+      display:flex; gap:.5rem; align-items:center; background:var(--card); border-radius:999px; padding:.35rem .5rem; box-shadow:var(--shadow)
+    }
+    .search input{
+      flex:1; background:transparent; border:none; color:var(--text); outline:none; padding:.4rem .6rem
+    }
+    .grid{display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap:1rem}
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)), var(--card);
+      border:1px solid rgba(255,255,255,.08); border-radius:var(--radius); box-shadow:var(--shadow);
+      padding:1rem
+    }
+    .card h3{margin:.2rem 0 .4rem; font-size:1.05rem}
+    .tag{font-size:.7rem; color:#cfd3ff; background:var(--soft); padding:.2rem .45rem; border-radius:999px}
+    .list{padding-left:1rem}
+    .list li{margin:.35rem 0}
+    .btn{
+      appearance:none; border:none; border-radius:999px; padding:.45rem .75rem; cursor:pointer;
+      background: linear-gradient(135deg, #7c8cff, #9aa0ff); color:#0b0e22; font-weight:600; box-shadow:var(--shadow)
+    }
+    .btn.secondary{background:transparent; color:var(--text); border:1px solid rgba(255,255,255,.18)}
+    .row{display:flex; gap:.5rem; flex-wrap:wrap}
+    .footer{opacity:.8; font-size:.85rem}
+
+    /* Quiz */
+    .quiz-q{margin:.5rem 0}
+    .quiz-opt{display:block; margin:.25rem 0; padding:.45rem .6rem; border-radius:.75rem; background:var(--soft); cursor:pointer; border:1px solid rgba(255,255,255,.08)}
+    .quiz-opt.correct{outline:2px solid var(--ok)}
+    .quiz-opt.wrong{outline:2px solid var(--bad)}
+
+    /* Simple fade-in */
+    .fade{animation: fade .6s ease both}
+    @keyframes fade{from{opacity:0; transform: translateY(6px)} to{opacity:1; transform:none}}
+
+    @media (max-width: 800px){
+      .hero{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap hero">
+      <div class="fade">
+        <span class="pill">Educación emocional</span>
+        <h1>Explora tus emociones</h1>
+        <p>Una guía clara y práctica para estudiantes de secundaria: qué son las emociones, cómo reconocerlas y cómo manejarlas en el día a día.</p>
+        <div class="row">
+          <button class="btn" onclick="document.getElementById('basicas').scrollIntoView({behavior:'smooth'})">Emociones básicas</button>
+          <button class="btn secondary" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">Mini‑quiz</button>
+        </div>
+      </div>
+      <div class="fade">
+        <div class="search">
+          🔎 <input id="search" type="search" placeholder="Buscar emoción o tema… (ej. ansiedad, ira)" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="basicas" class="fade">
+      <h2>Emociones básicas</h2>
+      <div class="grid" id="cards">
+        <article class="card" data-keywords="alegria felicidad entusiasmo bienestar">
+          <span class="tag">Básica</span>
+          <h3>Alegría</h3>
+          <p>Emoción que aparece cuando algo nos resulta valioso o agradable.</p>
+          <ul class="list">
+            <li>Señales: sonrisa, energía, ganas de compartir.</li>
+            <li>Útil para: motivación y conexión con otras personas.</li>
+            <li>Tip: celebra logros pequeños.</li>
+          </ul>
+        </article>
+        <article class="card" data-keywords="tristeza perdida desanimo duelo">
+          <span class="tag">Básica</span>
+          <h3>Tristeza</h3>
+          <p>Respuesta natural ante pérdidas o decepciones.</p>
+          <ul class="list">
+            <li>Señales: ganas de llorar, baja energía.</li>
+            <li>Útil para: pedir apoyo y reflexionar.</li>
+            <li>Tip: habla con alguien de confianza.</li>
+          </ul>
+        </article>
+        <article class="card" data-keywords="miedo ansiedad peligro seguridad">
+          <span class="tag">Básica</span>
+          <h3>Miedo</h3>
+          <p>Nos protege ante posibles peligros.</p>
+          <ul class="list">
+            <li>Señales: tensión, corazón acelerado.</li>
+            <li>Útil para: tomar precauciones.</li>
+            <li>Tip: respira lento y evalúa si el riesgo es real.</li>
+          </ul>
+        </article>
+        <article class="card" data-keywords="ira enojo frustracion limites">
+          <span class="tag">Básica</span>
+          <h3>Ira</h3>
+          <p>Surge cuando sentimos injusticia o bloqueo.</p>
+          <ul class="list">
+            <li>Señales: calor, tensión, impulsividad.</li>
+            <li>Útil para: poner límites.</li>
+            <li>Tip: pausa de 90 segundos antes de actuar.</li>
+          </ul>
+        </article>
+        <article class="card" data-keywords="asco rechazo limites">
+          <span class="tag">Básica</span>
+          <h3>Asco</h3>
+          <p>Nos ayuda a evitar lo que percibimos como dañino.</p>
+          <ul class="list">
+            <li>Señales: gesto de rechazo.</li>
+            <li>Útil para: autocuidado.</li>
+            <li>Tip: identifica qué te genera esa reacción.</li>
+          </ul>
+        </article>
+        <article class="card" data-keywords="sorpresa novedad cambio">
+          <span class="tag">Básica</span>
+          <h3>Sorpresa</h3>
+          <p>Respuesta a lo inesperado.</p>
+          <ul class="list">
+            <li>Señales: ojos abiertos, atención.</li>
+            <li>Útil para: adaptarnos rápido.</li>
+            <li>Tip: date un momento para entender qué pasó.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="fade">
+      <h2>Estrategias para manejar emociones</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>1) Nombrar lo que sientes</h3>
+          <p>Ponerle nombre a la emoción reduce su intensidad y te da control.</p>
+        </div>
+        <div class="card">
+          <h3>2) Respiración 4‑6</h3>
+          <p>Inhala 4 segundos, exhala 6. Repite 5 veces.</p>
+        </div>
+        <div class="card">
+          <h3>3) Pensamiento útil</h3>
+          <p>Cambia “todo sale mal” por “esto es difícil, pero puedo intentarlo”.</p>
+        </div>
+        <div class="card">
+          <h3>4) Movimiento</h3>
+          <p>Caminar 10 minutos baja la activación del cuerpo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz" class="fade">
+      <h2>Mini‑quiz</h2>
+      <div class="card">
+        <div class="quiz-q"><strong>¿Qué emoción ayuda a poner límites cuando sentimos una injusticia?</strong></div>
+        <div class="quiz-opt" data-correct="false">Tristeza</div>
+        <div class="quiz-opt" data-correct="true">Ira</div>
+        <div class="quiz-opt" data-correct="false">Asco</div>
+        <p id="quiz-feedback" class="footer"></p>
+      </div>
+    </section>
+
+    <section class="fade">
+      <h2>Recursos rápidos</h2>
+      <div class="grid">
+        <div class="card"><h3>Semáforo emocional</h3><p>Rojo: me detengo · Amarillo: respiro · Verde: actúo con calma.</p></div>
+        <div class="card"><h3>Rueda de emociones</h3><p>Amplía tu vocabulario emocional para expresarte mejor.</p></div>
+        <div class="card"><h3>Pedí ayuda</h3><p>Hablar con un adulto de confianza o el orientador escolar es valentía.</p></div>
+      </div>
+    </section>
+
+    <p class="footer">Hecho para aprender y practicar. Puedes descargar este archivo y abrirlo sin internet.</p>
+  </main>
+
+  <script>
+    // Búsqueda simple
+    const search = document.getElementById('search');
+    const cards = [...document.querySelectorAll('#cards .card')];
+    search.addEventListener('input', e => {
+      const q = e.target.value.toLowerCase().trim();
+      cards.forEach(c => {
+        const text = (c.innerText + ' ' + c.dataset.keywords).toLowerCase();
+        c.style.display = text.includes(q) ? '' : 'none';
+      });
+    });
+
+    // Quiz
+    const opts = document.querySelectorAll('.quiz-opt');
+    const fb = document.getElementById('quiz-feedback');
+    opts.forEach(o => o.addEventListener('click', () => {
+      opts.forEach(x => x.classList.remove('correct','wrong'));
+      const ok = o.dataset.correct === 'true';
+      o.classList.add(ok ? 'correct' : 'wrong');
+      fb.textContent = ok ? '¡Correcto! La ira bien gestionada ayuda a poner límites.' : 'Casi. Intenta otra vez y piensa qué emoción empuja a defender límites.';
+    }));
+  </script>
+</body>
+</html>
